@@ -1,12 +1,12 @@
 import './App.scss';
 
-import React, { SFC } from 'react';
+import React, { FunctionComponent } from 'react';
 
 interface Props {
   name: string;
 }
 
-const App: SFC<Props> = ({ name }) => (
+const App: FunctionComponent<Props> = ({ name }) => (
   <div styleName="greeting">Hello, {name}</div>
 );
 
