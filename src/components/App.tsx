@@ -1,7 +1,13 @@
-import "./App.scss";
+import './App.scss';
 
-import React, { SFC } from "react";
+import React, { SFC } from 'react';
 
-const App: SFC = () => <div styleName="greeting">Hello, World</div>;
+interface Props {
+  name: string;
+}
+
+const App: SFC<Props> = ({ name }) => (
+  <div styleName="greeting">Hello, {name}</div>
+);
 
 export default App;

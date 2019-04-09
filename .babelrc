@@ -10,18 +10,19 @@
         },
         "generateScopedName": "[name]--[local]--[hash:base64:5]"
       }
-    ],
+    ]
   ],
   "presets": [
-    "@babel/preset-react", 
+    "@babel/preset-react",
     "@babel/preset-typescript",
-      [
-        "@babel/preset-env", {
-            "targets": {
-              "browsers": ["last 2 versions"]
-            },
-            "modules": false
-        }
-      ]
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "browsers": ["last 2 versions"]
+        },
+        "modules": false
+      }
+    ]
   ]
 }

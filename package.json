@@ -4,11 +4,14 @@
   "description": "Basic setup for a React project using TypeScript",
   "main": "index.js",
   "scripts": {
-    "start:dev": "NODE_ENV=development webpack-dev-server --mode=development",
+    "dev": "NODE_ENV=development webpack-dev-server --mode=development",
     "build": "NODE_ENV=production webpack --mode=production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["typescript", "react"],
+  "keywords": [
+    "typescript",
+    "react"
+  ],
   "author": "Justin Zelinsly",
   "license": "MIT",
   "dependencies": {
