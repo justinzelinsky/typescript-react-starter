@@ -6,7 +6,7 @@
     "lib": ["es2017", "dom"],
     "sourceMap": true,
     "allowJs": false,
-    "jsx": "preserve",
+    "jsx": "react",
     "rootDir": "src",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
