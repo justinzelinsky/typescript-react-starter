@@ -1,12 +1,15 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const paths = {
   source: path.join(__dirname, 'src'),
   dist: path.join(__dirname, 'dist')
 };
+
 const devMode = process.env.NODE_ENV !== 'production';
 const styleLoader = devMode ? 'style-loader' : MiniCssExtractPlugin.loader;
 
@@ -16,6 +19,8 @@ const devServer = {
   hot: true,
   port: 9000
 };
+
+const devtool = devMode ? 'inline-source-map' : '';
 
 const entry = path.join(paths.source, 'index.tsx');
 
@@ -39,12 +44,30 @@ const rules = [
         loader: 'sass-loader',
         options: {
           data: '@import "src/styles/globals";',
-          sourceMap: true
+          minimize: !devMode,
+          sourceMap: !devMode
         }
       }
     ]
+  },
+  {
+    test: /\.(png|jpe?g|gif)$/i,
+    use: ['file-loader']
   }
 ];
+
+const optimization = {
+  minimizer: [new OptimizeCSSAssetsPlugin({}), new TerserPlugin()],
+  splitChunks: {
+    cacheGroups: {
+      commons: {
+        test: /[\\/]node_modules[\\/]/,
+        name: 'vendors',
+        chunks: 'all'
+      }
+    }
+  }
+};
 
 const output = {
   filename: 'app.js',
@@ -66,17 +89,19 @@ if (!devMode) {
 }
 
 const resolve = {
-  extensions: ['.tsx', '.ts', '.js', '.jsx', '.json'],
+  extensions: ['.tsx', '.ts', '.js', '.jsx'],
   modules: ['node_modules', 'src', 'src/components']
 };
 
 module.exports = {
   devServer,
+  devtool,
   entry,
   module: {
     rules
   },
   output,
+  optimization,
   plugins,
   resolve
 };
